@@ -17,7 +17,7 @@ def api_dashbord():
     for farmer in all_farmers:
         if count == 7:
             break
-         count += 1
+        count += 1
         farmer_data = {}
         
         farmer_data = {}
@@ -33,7 +33,7 @@ def api_dashbord():
         
     return jsonify({'farmers':farmers,'count_farmers':count_farmers,'count_farms':count_farms })
     
-@app.route('/api/add-farmer', methods =['POST']
+@app.route('/api/add-farmer', methods =['POST'])
 def api_addFarmer():
     data = request.get_json()
     
@@ -57,7 +57,7 @@ def api_addFarmer():
     return jsonify({'Message':'This farmer name : %s is now added' %farmer.firstname})
 
 
-@app.route('/api/add-farm', methods =['GET']
+@app.route('/api/add-farm', methods =['GET'])
 def api_addFarm1():
 
     all_farmers = Farmers.query.all()
@@ -118,6 +118,17 @@ def api_yieldCalculator1():
 @app.route('/api/yield-calculator', methods =['POST'])
 def api_yieldCalculator2():
     data = request.get_json()
+    
+    if  'crop' in data:
+        farmname = data["crop"]
+    if  'district' in data:
+        district = data["district"]
+    if  'parish' in data:
+        parish = data["parish"]
+    if  'land_size' in data:
+        district = data["land_size"]
+    
+    soil_type = 
     '''
     Get the attributes that will be passed as parameters to the model
     tentative atributes are:

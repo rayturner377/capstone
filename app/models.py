@@ -35,7 +35,7 @@ class Farmers(db.Model):
     def __repre__(self):
         return '<Name %r>' % self.first_name
 
-class Farms(db.Model)
+class Farms(db.Model):
     farmid = db.Column(db.Integer, primary_key=True)
     farm_name = db.Column(db.String(100), nullable=False, default = '')
     soilType = db.Column(db.String(100), nullable=False, default = '')
@@ -71,6 +71,29 @@ class Crops(db.Model):
     def __repre__(self):
         return '<Name %r>' % self.crop_name
         
+        
+class Locations(db.Model):
+    locationid = db.Column(db.Integer, primary_key=True)
+    subdivision = db.Column(db.String(100), nullable=False, default = '')
+    parish = db.Column(db.String(100), nullable=False, default = '')
+    district = db.Column(db.String(100), nullable=False, default = '')
+    soil_type = db.Column(db.String(100), nullable=False, default = '')
+    altitude = db.Column(db.Numeric(12, 2), nullable=False)
+    temperature = db.Column(db.Numeric(12, 2), nullable=False)
+    rainfall = db.Column(db.Numeric(12, 2), nullable=False)
+
+    def __init__(self,subdivision,parish, district, soil_type,altitude, temperature, rainfall):
+        self.subdivision = subdivision
+        self.parish = parish
+        self.district = district
+        self.soil_type = soil_type
+        self.altitude = altitude
+        self.temperature = temperature
+        rainfall = rainfall
+
+    def __repre__(self):
+        return '<Name %r>' % self.farm_name
+
 class Yields(db.Model):
     yieldid = db.Column(db.Integer, primary_key=True)
     cropid = db.Column(db.Integer(), db.ForeignKey('crops.cropid'), nullable=False)
@@ -85,25 +108,3 @@ class Yields(db.Model):
         self.locationid = locationid
         self.revenue = revenue
         self.date_predicted = datetime.datetime.now()
-        
-class Location(db.Model):
-    locationid = db.Column(db.Integer, primary_key=True)
-    subdivision = db.Column(db.String(100), nullable=False, default = '')
-    parish = db.Column(db.String(100), nullable=False, default = '')
-    district = db.Column(db.String(100), nullable=False, default = '')
-    soil_type = db.Column(db.String(100), nullable=False, default = '')
-    altitude = db.Column(db.Numeric(12, 2), nullable=False)
-    temperature = db.Column(db.Numeric(12, 2), nullable=False)
-    rainfall = db.Column(db.Numeric(12, 2), nullable=False)
-
-    def __init__(self,parish,subdivision,district, parish, soil_type,altitude, temperature, rainfall):
-        self.subdivision = subdivision
-        self.parish = parish
-        self.district = district
-        self.soil_type = soil_type
-        self.altitude = altitude
-        self.temperature = temperature
-        rainfall = rainfall
-
-    def __repre__(self):
-        return '<Name %r>' % self.farm_name
