@@ -22,10 +22,12 @@ class Farmers(db.Model):
     parish = db.Column(db.String(100), nullable=False, default = '')
     district = db.Column(db.String(200), nullable=False, default = '')
     created = db.Column(db.DateTime, nullable=False)
+    trn = db.Column(db.Integer,default = 000000000)
 
-    def __init__(self,first_name,last_name,gender,mobilenumber, parish, district):
+    def __init__(self,first_name,last_name,trn, gender,mobilenumber, parish, district):
         self.first_name = first_name
         self.last_name = last_name
+        self.trn = trn
         self.gender = gender
         self.mobilenumber = mobilenumber
         self.parish = parish

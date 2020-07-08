@@ -49,6 +49,8 @@ def api_addFarmer():
         parish = data["parish"]
     if  'district' in data:
         district = data["district"]
+    if 'trn' in data:
+        trn = data['trn']
         
     farmer = Farmers(firstname = first_name, lastname = last_name,gender = gender , mobilenumber = mobile,parish = parish, district = district )
     db.session.add(farmer)
@@ -140,6 +142,34 @@ def api_yieldCalculator2():
     '''
     Here is where the model drops in
     '''
+
+@app.route('/api/search', methods =['POST'])
+def api_farmer_search():
+    data = request.get_json()
+    
+    if 'trn' in data:
+        searchval = data['trn']
+        searchdata = trnSearch(searchval)
+        return searchdata
+    if 'name' in data:
+        searchdata = nameSearch(searchval)
+        return searchdata
+        
+
+def trnSearch(trn):
+    farmer = Farmers.query.filter_by(trn=trn).first()
+    farmerdata = {}
+    
+    farmerdata['farmerid'] = farmer.farmerid
+    farmerdata['firstname'] = farmer.name
+    farmerdata['lastname']= farmer.lastname
+    farmerdata['gender'] = farmer.gender
+    farmerdata['mobile'] = farmer.contact
+    farmerdata['parish'] = farmer.parish
+    farmerdata['district'] = farmer.district
+    farmerdata['trn'] = trn
+    
+    return farmerdata
     
 
 
