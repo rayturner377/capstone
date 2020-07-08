@@ -128,7 +128,8 @@ def api_yieldCalculator2():
     if  'land_size' in data:
         district = data["land_size"]
     
-    soil_type = 
+    #soil_type = 
+    return "incomplete"
     '''
     Get the attributes that will be passed as parameters to the model
     tentative atributes are:

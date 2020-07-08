@@ -98,7 +98,7 @@ class Yields(db.Model):
     yieldid = db.Column(db.Integer, primary_key=True)
     cropid = db.Column(db.Integer(), db.ForeignKey('crops.cropid'), nullable=False)
     farmid = db.Column(db.Integer(), db.ForeignKey('farms.farmid'), nullable=False)
-    locationid = db.Column(db.Integer(), db.ForeignKey('location.locationid'), nullable=False)
+    locationid = db.Column(db.Integer(), db.ForeignKey('locations.locationid'), nullable=False)
     revenue = db.Column(db.Numeric(12, 2), nullable=False)
     date_predicted = db.Column(db.DateTime, nullable=False, default = datetime.datetime.now())
 
